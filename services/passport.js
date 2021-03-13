@@ -3,9 +3,23 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 
-const emilyUser = mongoose.model("emailyUsers");
+const emailyUser = mongoose.model("emailyUsers");
+
+//adding unique id into the cookie for the follow up request
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// making the follow up request without entering the password again.
+// By using id stored in cookies
+passport.deserializeUser((id, done) => {
+  emailyUser.findById(id).then((user) => {
+    done(null, user);
+  }); 
+});
 
 passport.use(
+  //Google Strategy
   new GoogleStrategy(
     {
       clientID: keys.googleClientID,
@@ -13,10 +27,15 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      emilyUser.findOne({ googleId: profile.id }).then((existingUser) => {
+      emailyUser.findOne({ googleId: profile.id }).then((existingUser) => {
         if (existingUser) {
           // we already have a record with the given profile ID
-        } else new emilyUser({ googleId: profile.id }).save();
+          done(null, existingUser);
+        } else {
+          new emailyUser({ googleId: profile.id })
+            .save()
+            .then((user) => done(null, user));
+        }
       });
     }
   )

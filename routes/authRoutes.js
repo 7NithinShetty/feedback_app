@@ -19,11 +19,17 @@ module.exports = (app) => {
   // for the follow up request.
   // Passport will handle this request in a different way,
   // since it has a code along with the router
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/survey");
+    }
+  );
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect("/");
   });
 
   app.get("/api/current_user", (req, res) => {

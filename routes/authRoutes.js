@@ -2,10 +2,11 @@ const passport = require("passport");
 
 module.exports = (app) => {
   // Whenever the user comes to this route, this section will make the
-  // request to go through the OAuth flow.
+  // request to go through the OAuth flow (passport).
   // This routes tells the passport to authenticate this user by using
   // google strategy.
-  // Scope: Is asking the google to give access for this scopes of a user.
+  // Scope: google will ask the permission for these to scope to use
+  // behalf of Emaily app.
   app.get(
     "/auth/google",
     passport.authenticate("google", {
@@ -14,7 +15,7 @@ module.exports = (app) => {
   );
 
   // after redirecting from the google, we will handover again
-  // to the passport. (or)
+  // to the passport whrever we need user profile information. (or)
   // user will be sent back to this router by google with some code
   // for the follow up request.
   // Passport will handle this request in a different way,
@@ -23,7 +24,7 @@ module.exports = (app) => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      res.redirect("/survey");
+      res.redirect("/surveys");
     }
   );
 

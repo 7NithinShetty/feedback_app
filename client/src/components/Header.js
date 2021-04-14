@@ -27,12 +27,12 @@ class Header extends Component {
           </li>,
         ];
     }
-  }
+  } 
 
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper navbar">
           <Link
             to={this.props.auth ? "/surveys/" : "/"}
             className="left brand-logo"
@@ -42,12 +42,25 @@ class Header extends Component {
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>
-    );
+    // <div className='glass'>
+    //     <div>
+    //       <Link
+    //         to={this.props.auth ? "/surveys/" : "/"}
+    //         className="left brand-logo"
+    //         >
+    //         Emaily
+    //       </Link>
+    //     </div>
+    //     <div>
+    //       <ul className="navRight">{this.renderContent()}</ul>
+    //     </div>
+    // </div>
+  ); 
   }
 }
 
-function mapStateToProps(state) {
-  return { auth: state.auth };
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(Header);

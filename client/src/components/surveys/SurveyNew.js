@@ -22,7 +22,7 @@ class SurveyNew extends Component {
         {this.renderContent()}
       </div>
     ); 
-  }
+  }   
 }
 
 export default reduxForm({

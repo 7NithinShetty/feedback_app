@@ -31,28 +31,16 @@ class Header extends Component {
 
   render() {
     return (
-      // <nav>
-      //   <div className="nav-wrapper navbar">
-      //     <Link
-      //       to={this.props.auth ? "/surveys/" : "/"}
-      //       className="left brand-logo"
-      //     >
-      //       Emaily
-      //     </Link>
-      //     <ul className="right">{this.renderContent()}</ul>
-      //   </div>
-      // </nav>
-      <div className="glass">
-        <div>
-          <Link
-            to={this.props.auth ? "/surveys/" : "/"}
-            className="left brand-logo"
-          >
-            Emaily
+      <div className={this.props.auth ? "glass" : "landingHeader"}>
+        <div className="logo">
+          <Link to={this.props.auth ? "/surveys/" : "/"} className="">
+            <span>Feed</span> <span>Back</span>
           </Link>
         </div>
-        <div>
-          <ul className="navRight">{this.renderContent()}</ul>
+        <div className="exceptLogo">
+          <ul className={this.props.auth ? "navRight" : "login"}>
+            {this.renderContent()}
+          </ul>
         </div>
       </div>
     );

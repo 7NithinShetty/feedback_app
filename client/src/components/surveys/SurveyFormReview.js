@@ -5,32 +5,7 @@ import formField from "./formField";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 
-// const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
-//   const reviewFields = _.map(formField, ({ name, label }) => {
-//     return (
-//       <div key={name}>
-//         <label>{label}</label>
-//         <div>{formValues[name]}</div>
-//       </div>
-//     );
-//   });
 
-//   return (
-//     <div>
-//       <h5>Please confirm your entries</h5>
-//       {reviewFields}
-//       <button className="yellow darken-3 btn-flat" onClick={onCancel}>
-//         Back
-//       </button>
-//       <button
-//         onClick={() => submitSurvey(formValues, history)}
-//         className="green btn-flat right white-text"
-//       >
-//         Send Survey <i className="material-icons right">email</i>
-//       </button>
-//     </div>
-//   );
-// };
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   const reviewFields = _.map(formField, ({ name, label }) => {
     return (
@@ -42,7 +17,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   });
 
   return (
-    <div className='OuterFormReview'>
+    <div className="surveyMarginTop">
       <div className="formReviewField">
         <h5>Please confirm your entries</h5>
         {reviewFields}
